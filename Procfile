@@ -1,1 +1,1 @@
-web: gunicorn ESSPRESYA.wsgi:application
+web: gunicorn ESSPRESYA.wsgi:application --bind 0.0.0.0:$PORT
