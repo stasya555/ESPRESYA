@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Редактировать напиток</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Coolvetica', sans-serif;
+      background: #1e1f22;
+      color: #f1f1f1;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 60px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #1e1f22;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    input, textarea, select {
+      background-color: #ffffff;
+      color: #1e1f22;
+      padding: 10px;
+      border: 2px solid #1e1f22;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: #ffffff;
+      outline: none;
+      background-color: #ffffff;
+    }
+
+    button {
+      background-color: #1e1f22;
+      color: #ffffff;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #1c5adf;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #1e1f22;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #1c5adf;
+    }
+
+    label {
+        color: black;
+    }
+
+    p{
+        color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Редактировать напиток: {{ drink.name }}</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Сохранить</button>
+    </form>
+    <a href="{% url 'admin_panel' %}">← Назад</a>
+  </div>
+</body>
+</html>

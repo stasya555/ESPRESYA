@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Вход в админку</title>
+  <link href="https://fonts.cdnfonts.com/css/coolvetica" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gergel:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>Вход в админку</h1>
+  {% if error %}
+    <p class="error">{{ error }}</p>
+  {% endif %}
+  <form method="post" style="width: 500px">
+    {% csrf_token %}
+    <input type="password" name="password" placeholder="Пароль" required>
+    <button type="submit">Войти</button>
+  </form>
+  <style>
+       @font-face {
+            font-family: 'Coolvetica Rg';
+            font-style: normal;
+            font-weight: normal;
+            src: url('/static/font/coolvetica rg.ttf') format('truetype');
+        }
+  body {
+      background-color: #1e1f22;
+    display: flex
+;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+}
+
+h1, h2 {
+  font-family: 'Coolvetica Rg';
+  color:#fff;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+h1 {
+      font-size: 100px;
+    font-weight: 500;
+
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-top: 2rem;
+}
+
+a {
+  color: #FF6B35;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #ff3600;
+}
+
+form {
+  background-color: #f5f5f5;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+input[type="password"],
+input[type="text"],
+input[type="file"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px 0;
+  margin: 0.5rem 0 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Coolvetica', sans-serif;
+  background: white;
+}
+
+button {
+  background-color: #fff;
+  color: black;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: 'Coolvetica', sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #3f5ac0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background-color: #F5F5F5;
+  margin-bottom: 0.7rem;
+  padding: 1rem;
+  border-radius: 10px;
+  border-left: 6px solid #5C7DEE;
+  font-size: 1rem;
+}
+
+hr {
+  margin: 3rem 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    padding: 1rem;
+  }
+
+  form {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+}</style>
+</body>
+</html>

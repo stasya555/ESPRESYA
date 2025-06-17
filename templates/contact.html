@@ -1,0 +1,10 @@
+{% if message_sent %}
+  <p style="color:green;">Спасибо! Сообщение отправлено.</p>
+{% endif %}
+<form method="post">
+  {% csrf_token %}
+  <input type="text" name="name" placeholder="Имя" required><br>
+  <input type="email" name="email" placeholder="Email" required><br>
+  <textarea name="message" placeholder="Сообщение" required></textarea><br>
+  <button type="submit">Отправить</button>
+</form>

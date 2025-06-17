@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head><title>Подтверждение удаления</title></head>
+<body>
+  <h1>Удалить {{ type }}: {{ object }}</h1>
+  <p>Вы уверены, что хотите удалить {{ type }}?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Да, удалить</button>
+    <a href="{% url 'admin_panel' %}">Отмена</a>
+  </form>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>админка</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Coolvetica&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Coolvetica', sans-serif;
+      background: #1e1f22;
+      color: white;
+    }
+
+    header {
+          background: white;
+    color: #333;
+    font-family: Gergel;
+    padding: 20px 40px;
+    text-align: center;
+    font-size: 80px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h2 {
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    form {
+      background: white;
+      border-radius: 12px;
+      padding: 25px 30px;
+      margin-bottom: 40px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: white;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-bottom: 18px;
+      transition: border-color 0.3s ease;
+            background-color: white;
+    }
+
+    input[type="text"]:focus,
+    input[type="file"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: white
+      outline: none;
+          background-color: white;
+
+    }
+
+    button {
+      background-color: white;
+      color: white;
+      font-size: 18px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: white;
+    }
+
+    .items-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .item-card {
+      background: white;
+      border-radius: 15px;
+     
+      padding: 20px;
+      width: 280px;
+      text-align: center;
+    }
+
+    .item-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+
+    .item-card h3 {
+      margin: 12px 0 8px;
+      color: white;
+      font-weight: 700;
+    }
+
+    .item-card p {
+      font-size: 14px;
+      color: #666;
+      min-height: 50px;
+    }
+
+    .item-actions {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-around;
+    }
+    
+    p{
+        color: black;
+    }
+    label{
+        color: black;
+    }
+    .item-card form{
+        margin: 0;
+        padding: 0;
+    }
+
+    .item-actions form {
+      display: inline;
+    }
+
+    .item-actions button {
+      background-color: #ff6f00;
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+
+    .item-actions button:hover {
+      background-color: #cc5c00;
+    }
+
+    .section-divider {
+      margin: 60px 0 20px;
+      border-top: 2px dashed #ccc;
+    }
+  </style>
+</head>
+<body>
+  <header>админка</header>
+  <main>
+
+    <section>
+      <h2>Добавить напиток</h2>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ drink_form.as_p }}
+        <button type="submit" name="add_drink">Добавить напиток</button>
+      </form>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section>
+      <h2>Добавить постер</h2>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ poster_form.as_p }}
+        <button type="submit" name="add_poster">Добавить постер</button>
+      </form>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section>
+      <h2>Список напитков</h2>
+      <div class="items-list">
+        {% for drink in drinks %}
+          <div class="item-card">
+            <img src="{{ drink.image.url }}" alt="{{ drink.name }}">
+            <h3>{{ drink.name }}</h3>
+            <p>{{ drink.description|truncatechars:80 }}</p>
+            <div class="item-actions">
+              <a href="{% url 'edit_drink' drink.id %}"><button>Редактировать</button></a>
+                <form method="post" action="{% url 'delete_drink' drink.id %}">
+                {% csrf_token %}
+                <button type="submit">Удалить</button>
+              </form>
+            </div>
+          </div>
+        {% empty %}
+          <p>Напитков пока нет</p>
+        {% endfor %}
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section>
+      <h2>Список постеров</h2>
+      <div class="items-list">
+        {% for poster in posters %}
+          <div class="item-card">
+            <img src="{{ poster.image.url }}" alt="{{ poster.title }}">
+            <h3>{{ poster.title }}</h3>
+            <p>{{ poster.description|truncatechars:80 }}</p>
+            <div class="item-actions">
+              <a href="{% url 'edit_poster' poster.id %}"><button>Редактировать</button></a>
+              <form method="post" action="{% url 'delete_poster' poster.id %}">
+                {% csrf_token %}
+                <button type="submit">Удалить</button>
+              </form>
+            </div>
+          </div>
+        {% empty %}
+          <p>Постеров пока нет</p>
+        {% endfor %}
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
