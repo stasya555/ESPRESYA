@@ -128,14 +128,31 @@ import dj_database_url
 # DATABASES = {}
 # DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
+
+import dj_database_url
+
+import os
+from pathlib import Path
+import dj_database_url
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600
-    )
-}
+DATABASE_URL = os.getenv('DATABASE_URL')
+print(f"DATABASE_URL: {DATABASE_URL}")  # Для отладки
+
+if DATABASE_URL:
+    print("Using PostgreSQL database from DATABASE_URL")
+    DATABASES = {
+        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+    }
+else:
+    print("Using SQLite database")
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': str(BASE_DIR / 'db.sqlite3'),
+        }
+    }
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
