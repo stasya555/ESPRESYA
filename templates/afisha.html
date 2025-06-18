@@ -11568,7 +11568,7 @@ justify-content: center;
 
       <!-- Блок 1: первые 3 постера -->
       <div class="colm_img_block_light" style="display: flex; gap: 10px; margin-bottom: 50px;">
-        {% for poster in posters|slice:":3" %}
+        {% for poster in posters %}
           <div class="poster-block" style="color: black; width: 390px; {% if forloop.counter == 2 %}margin-right: 400px;{% endif %}" 
                data-image="{{ poster.image.url }}"
                data-title="{{ poster.title|escapejs }}"
@@ -11600,7 +11600,7 @@ justify-content: center;
           {% endwith %}
         </div>
         <div class="colm_img_block_large_right" style="margin-left: 10px;">
-          {% for poster in posters|slice:"4:6" %}
+          {% for poster in posters %}
             <div class="poster-block" style="width: 390px; {% if forloop.counter == 2 %}margin-top: -45px; margin-left: 400px;{% endif %}" 
                  data-image="{{ poster.image.url }}"
                  data-title="{{ poster.title|escapejs }}"
@@ -11618,7 +11618,7 @@ justify-content: center;
 
       <!-- Блок 3: 3 постера в ряд -->
       <div class="colm_img_block_light" style="display: flex; flex-direction: row; gap: 10px; margin-bottom: 50px;">
-        {% for poster in posters|slice:"6:9" %}
+        {% for poster in posters %}
           <div class="poster-block" style="{% if forloop.counter == 1 %}margin-right: 400px;{% endif %}" 
                data-image="{{ poster.image.url }}"
                data-title="{{ poster.title|escapejs }}"
@@ -11635,7 +11635,7 @@ justify-content: center;
     <!-- Блок 4: 3 постера, 2 слева, 1 большой справа -->
       <div class="colm_img_block_large" style="margin-bottom: 50px; display: flex; gap: 10px;">
         <div class="colm_img_block_large_left">
-          {% for poster in posters|slice:"9:11" %}
+          {% for poster in posters %}
             <div class="poster-block" style="width: 390px; {% if forloop.counter == 1 %}margin-left: 400px;{% else %}margin-top: -45px;{% endif %}" 
                  data-image="{{ poster.image.url }}"
                  data-title="{{ poster.title|escapejs }}"
@@ -11667,7 +11667,7 @@ justify-content: center;
 
       <!-- Блок 5: последние 2 постера -->
       <div class="colm_img_block_light" style="display:flex;">
-        {% for poster in posters|slice:"12:14" %}
+        {% for poster in posters %}
           <div class="poster-block" style="width: 390px; {% if forloop.counter == 2 %}margin-left: 10px;{% endif %}" 
                data-image="{{ poster.image.url }}"
                data-title="{{ poster.title|escapejs }}"
